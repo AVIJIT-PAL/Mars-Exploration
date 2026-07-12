@@ -92,6 +92,7 @@ function drawScene() {
         ctx.fill();
     }
 }
+updateGame();
 // Add touch controls for mobile
 window.addEventListener("touchstart", () => {
     if (gameActive) isThrusting = true;
@@ -100,4 +101,3 @@ window.addEventListener("touchstart", () => {
 window.addEventListener("touchend", () => {
     isThrusting = false;
 });
-updateGame();
