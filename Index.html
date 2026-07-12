@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Ares: The First Landing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- The Game Canvas -->
+        <canvas id="gameCanvas" width="600" height="800"></canvas>
+        
+        <!-- Heads Up Display (HUD) -->
+        <div id="hud">
+            <h2>Ares Lander Telemetry</h2>
+            <p>Altitude: <span id="alt-display">1000</span> m</p>
+            <p>Velocity: <span id="vel-display">0</span> m/s</p>
+            <p>Propellant: <span id="fuel-display">100</span>%</p>
+            <p id="status-message">Press SPACEBAR to ignite retro-thrusters</p>
+        </div>
+    </div>
+    
+    <!-- Link to the game logic -->
+    <script src="script.js"></script>
+</body>
+</html>
