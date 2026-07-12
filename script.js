@@ -19,20 +19,29 @@ const safeLandingSpeed = 2.0;
 let isThrusting = false;
 let gameActive = true;
 
-// Player Input
-window.addEventListener("keydown", (e) => {
-    if (e.code === "Space" && gameActive) {
-        isThrusting = true;
-    }
-});
+// --- INPUT HANDLING ---
 
-window.addEventListener("keyup", (e) => {
-    if (e.code === "Space") {
-        isThrusting = false;
-    }
-});
+// Keyboard Support
+window.addEventListener("keydown", (e) => { if (e.code === "Space" && gameActive) isThrusting = true; });
+window.addEventListener("keyup", (e) => { if (e.code === "Space") isThrusting = false; });
 
-// Main Game Loop
+// Mobile Touch Button Logic
+const btn = document.createElement("button");
+btn.innerText = "THRUST";
+btn.style.position = "absolute";
+btn.style.bottom = "50px";
+btn.style.padding = "20px 40px";
+btn.style.fontSize = "20px";
+btn.style.backgroundColor = "#ff9900";
+btn.style.border = "none";
+btn.style.borderRadius = "10px";
+document.body.appendChild(btn);
+
+btn.addEventListener("touchstart", (e) => { e.preventDefault(); if (gameActive) isThrusting = true; });
+btn.addEventListener("touchend", (e) => { e.preventDefault(); isThrusting = false; });
+
+// --- GAME LOGIC ---
+
 function updateGame() {
     if (!gameActive) return;
 
@@ -61,7 +70,6 @@ function updateGame() {
     }
 }
 
-// Check Win/Loss
 function checkWinCondition() {
     if (velocity <= safeLandingSpeed) {
         statusMessage.style.color = "#00ffcc";
@@ -72,10 +80,8 @@ function checkWinCondition() {
     }
 }
 
-// Draw Graphics
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.fillStyle = "#cc5500"; 
     ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
 
@@ -92,12 +98,5 @@ function drawScene() {
         ctx.fill();
     }
 }
-updateGame();
-// Add touch controls for mobile
-window.addEventListener("touchstart", () => {
-    if (gameActive) isThrusting = true;
-});
 
-window.addEventListener("touchend", () => {
-    isThrusting = false;
-});
+updateGame();
