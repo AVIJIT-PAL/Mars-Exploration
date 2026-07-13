@@ -28,13 +28,16 @@ window.addEventListener("keyup", (e) => { if (e.code === "Space") isThrusting = 
 // Mobile Touch Button Logic
 const btn = document.createElement("button");
 btn.innerText = "THRUST";
-btn.style.position = "absolute";
+btn.style.position = "fixed";
 btn.style.bottom = "50px";
+btn.style.left = "50%";
+btn.style.transform = "translateX(-50%)";
 btn.style.padding = "20px 40px";
 btn.style.fontSize = "20px";
 btn.style.backgroundColor = "#ff9900";
 btn.style.border = "none";
 btn.style.borderRadius = "10px";
+btn.style.zIndex = "1000";
 document.body.appendChild(btn);
 
 btn.addEventListener("touchstart", (e) => { e.preventDefault(); if (gameActive) isThrusting = true; });
@@ -87,16 +90,15 @@ function drawScene() {
     ctx.fillStyle = "#cc5500"; 
     ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
 
-    // Rocket Body (The lander)
+    // Rocket Body
     const centerX = canvas.width / 2;
     const landerY = canvas.height - 50 - altitude - 40; 
     
-    // Main Body
     ctx.fillStyle = "#e0e0e0"; 
     ctx.fillRect(centerX - 15, landerY, 30, 40);
 
-    // Nose Cone (Triangle on top)
-    ctx.fillStyle = "#ff5555"; // Red accent for the top
+    // Nose Cone
+    ctx.fillStyle = "#ff5555";
     ctx.beginPath();
     ctx.moveTo(centerX - 15, landerY);
     ctx.lineTo(centerX + 15, landerY);
@@ -108,9 +110,9 @@ function drawScene() {
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(centerX - 15, landerY + 40);
-    ctx.lineTo(centerX - 25, landerY + 55); // Left leg
+    ctx.lineTo(centerX - 25, landerY + 55);
     ctx.moveTo(centerX + 15, landerY + 40);
-    ctx.lineTo(centerX + 25, landerY + 55); // Right leg
+    ctx.lineTo(centerX + 25, landerY + 55);
     ctx.stroke();
 
     // Thrust Plume
@@ -123,6 +125,6 @@ function drawScene() {
         ctx.fill();
     }
 }
-}
 
+// Start the game
 updateGame();
