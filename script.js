@@ -82,21 +82,47 @@ function checkWinCondition() {
 
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Mars Ground
     ctx.fillStyle = "#cc5500"; 
     ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
 
-    const landerY = canvas.height - 50 - altitude - 30; 
-    ctx.fillStyle = "#ffffff"; 
-    ctx.fillRect(canvas.width / 2 - 15, landerY, 30, 30);
+    // Rocket Body (The lander)
+    const centerX = canvas.width / 2;
+    const landerY = canvas.height - 50 - altitude - 40; 
+    
+    // Main Body
+    ctx.fillStyle = "#e0e0e0"; 
+    ctx.fillRect(centerX - 15, landerY, 30, 40);
 
+    // Nose Cone (Triangle on top)
+    ctx.fillStyle = "#ff5555"; // Red accent for the top
+    ctx.beginPath();
+    ctx.moveTo(centerX - 15, landerY);
+    ctx.lineTo(centerX + 15, landerY);
+    ctx.lineTo(centerX, landerY - 15);
+    ctx.fill();
+
+    // Landing Legs
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(centerX - 15, landerY + 40);
+    ctx.lineTo(centerX - 25, landerY + 55); // Left leg
+    ctx.moveTo(centerX + 15, landerY + 40);
+    ctx.lineTo(centerX + 25, landerY + 55); // Right leg
+    ctx.stroke();
+
+    // Thrust Plume
     if (isThrusting && fuel > 0) {
         ctx.fillStyle = "#ffaa00"; 
         ctx.beginPath();
-        ctx.moveTo(canvas.width / 2 - 10, landerY + 30);
-        ctx.lineTo(canvas.width / 2 + 10, landerY + 30);
-        ctx.lineTo(canvas.width / 2, landerY + 60 + Math.random() * 10); 
+        ctx.moveTo(centerX - 10, landerY + 40);
+        ctx.lineTo(centerX + 10, landerY + 40);
+        ctx.lineTo(centerX, landerY + 70 + Math.random() * 15); 
         ctx.fill();
     }
+}
 }
 
 updateGame();
