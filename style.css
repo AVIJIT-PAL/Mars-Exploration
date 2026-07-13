@@ -1,33 +1,36 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0a0a1a;
-    color: #00ffcc;
+    /* Energetic Martian Sky: A gradient from deep space blue to dusty orange */
+    background: linear-gradient(to bottom, #0a0a1a 0%, #3d2b1f 60%, #cc5500 100%);
+    color: #ffaa00;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 #game-container {
     position: relative;
-    border: 2px solid #00ffcc;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+    border: 3px solid #ff9900;
+    box-shadow: 0 0 25px rgba(204, 85, 0, 0.5);
 }
 
 canvas {
     display: block;
-    background-color: #111;
+    /* Transparent canvas so the body gradient shows through */
+    background-color: transparent;
 }
 
 #hud {
     position: absolute;
     top: 20px;
     left: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(40, 20, 10, 0.8);
     padding: 15px;
-    border: 1px solid #00ffcc;
+    border: 1px solid #ffaa00;
     border-radius: 5px;
     pointer-events: none;
 }
