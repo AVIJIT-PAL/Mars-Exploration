@@ -2,6 +2,12 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+// Ensure internal resolution matches display size
+canvas.width = 600;
+canvas.height = 800;
+
+// ... rest of your script.js code starts here ...
+
 // UI Elements
 const altDisplay = document.getElementById("alt-display");
 const velDisplay = document.getElementById("vel-display");
