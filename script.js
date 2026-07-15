@@ -2,17 +2,15 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-// Ensure internal resolution matches display size
-canvas.width = 600;
-canvas.height = 800;
-
-// ... rest of your script.js code starts here ...
-
 // UI Elements
 const altDisplay = document.getElementById("alt-display");
 const velDisplay = document.getElementById("vel-display");
 const fuelDisplay = document.getElementById("fuel-display");
 const statusMessage = document.getElementById("status-message");
+
+// Ensure internal resolution matches display size
+canvas.width = 600;
+canvas.height = 800;
 
 // Game Physics & Variables
 let altitude = 700;       
@@ -35,14 +33,14 @@ window.addEventListener("keyup", (e) => { if (e.code === "Space") isThrusting = 
 const btn = document.createElement("button");
 btn.innerText = "THRUST";
 btn.style.position = "fixed";
-btn.style.bottom = "50px";
+btn.style.bottom = "20px";
 btn.style.left = "50%";
 btn.style.transform = "translateX(-50%)";
-btn.style.padding = "20px 40px";
-btn.style.fontSize = "20px";
+btn.style.padding = "10px 25px";
+btn.style.fontSize = "16px";
 btn.style.backgroundColor = "#ff9900";
 btn.style.border = "none";
-btn.style.borderRadius = "10px";
+btn.style.borderRadius = "8px";
 btn.style.zIndex = "1000";
 document.body.appendChild(btn);
 
@@ -104,6 +102,36 @@ function drawScene() {
     ctx.fillRect(centerX - 15, landerY, 30, 40);
 
     // Nose Cone
+    ctx.fillStyle = "#ff5555";
+    ctx.beginPath();
+    ctx.moveTo(centerX - 15, landerY);
+    ctx.lineTo(centerX + 15, landerY);
+    ctx.lineTo(centerX, landerY - 15);
+    ctx.fill();
+
+    // Landing Legs
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(centerX - 15, landerY + 40);
+    ctx.lineTo(centerX - 25, landerY + 55);
+    ctx.moveTo(centerX + 15, landerY + 40);
+    ctx.lineTo(centerX + 25, landerY + 55);
+    ctx.stroke();
+
+    // Thrust Plume
+    if (isThrusting && fuel > 0) {
+        ctx.fillStyle = "#ffaa00"; 
+        ctx.beginPath();
+        ctx.moveTo(centerX - 10, landerY + 40);
+        ctx.lineTo(centerX + 10, landerY + 40);
+        ctx.lineTo(centerX, landerY + 70 + Math.random() * 15); 
+        ctx.fill();
+    }
+}
+
+// Start the game
+updateGame();    // Nose Cone
     ctx.fillStyle = "#ff5555";
     ctx.beginPath();
     ctx.moveTo(centerX - 15, landerY);
